@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ManagementUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ManagementSeminarController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,6 +20,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/users', [ManagementUserController::class, 'store'])->name('users.store');
     Route::put('/users/{user}', [ManagementUserController::class, 'update'])->name('users.update');
     Route::delete('/users/{user}', [ManagementUserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('management-seminars', [ManagementSeminarController::class, 'index'])->name('management-seminars');
+
+    Route::post('/seminars', [ManagementSeminarController::class, 'store'])->name('seminars.store');
+    Route::put('/seminars/{seminar}', [ManagementSeminarController::class, 'update'])->name('seminars.update');
+    Route::delete('/seminars/{seminar}', [ManagementSeminarController::class, 'destroy'])->name('seminars.destroy');
 });
 
 require __DIR__.'/settings.php';

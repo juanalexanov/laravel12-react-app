@@ -32,8 +32,8 @@ class Seminar extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'eventDate' => 'date',
-        'eventTime' => 'datetime',
+        'eventDate' => 'date:Y-m-d',
+        'eventTime' => 'string',
         'price' => 'decimal:2',
     ];
 

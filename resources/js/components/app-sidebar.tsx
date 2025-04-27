@@ -20,7 +20,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Management Seminars',
-        href: 'https://github.com/laravel/react-starter-kit',
+        href: '/management-seminars',
         icon: Folder,
     },
     {
