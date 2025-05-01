@@ -23,4 +23,7 @@ export default defineConfig({
             '@': '/resources/js',
         },
     },
+    optimizeDeps: {
+        include: ['pdfjs-dist/build/pdf.worker.entry'],
+    },
 });

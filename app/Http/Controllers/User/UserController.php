@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
+use App\Models\SpeakerApplication;
 use Midtrans\Snap;
 use Midtrans\Config;
 
@@ -185,5 +186,41 @@ class UserController extends Controller
         return Inertia::render('Users/SeminarHistory', [
             'seminars' => $seminars,
         ]);
+    }
+
+    public function speakerApplicationForm()
+    {
+        return Inertia::render('Users/SpeakerApplication');
+    }
+
+    public function submitSpeakerApplication(Request $request)
+    {
+        $request->validate([
+            'remarks' => 'nullable|string|max:500',
+            'cv' => 'required|file|mimes:pdf|max:2048',
+        ]);
+
+        $user = Auth::user();
+
+        $application = SpeakerApplication::create([
+            'user_id' => $user->id,
+            'applicationDate' => now(),
+            'status' => 'pending',
+            'remarks' => $request->remarks,
+        ]);
+
+        $path = $request->file('cv')->storeAs(
+            'cv_speakers',
+            'cv_' . $user->id . '_' . $application->id . '.pdf',
+            'public'
+        );
+
+        if (!$path) {
+            Log::error('❌ CV upload failed');
+        } else {
+            Log::info('✅ CV uploaded to: ' . $path);
+        }
+
+        return back()->with('success', 'Lamaran pembicara berhasil dikirim.');
     }
 }

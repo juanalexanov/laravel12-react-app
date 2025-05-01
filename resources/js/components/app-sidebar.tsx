@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { BookOpen, Folder, History, LayoutGrid, LayoutList, UserRoundPlus } from 'lucide-react';
 import AppLogo from './app-logo';
 
 export function AppSidebar() {
@@ -32,8 +32,9 @@ export function AppSidebar() {
             { title: 'Management Payments', href: '#', icon: Folder },
         ]
         : [
-            { title: 'List Seminar', href: '/seminars', icon: Folder },
-            { title: 'History Seminar', href: '/seminars/history', icon: Folder },
+            { title: 'List Seminar', href: '/seminars', icon: LayoutList },
+            { title: 'History Seminar', href: '/seminars/history', icon: History },
+            { title: 'Daftar Pembicara', href: '/seminars/speaker_applications', icon: UserRoundPlus },
         ];
 
     const footerNavItems: NavItem[] = [

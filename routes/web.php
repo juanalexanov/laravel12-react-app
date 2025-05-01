@@ -33,11 +33,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::get('/seminars', [UserController::class, 'list'])->name('seminars.list');
     Route::get('/seminars/history', [UserController::class, 'history'])->name('seminars.history');
 
-    // Untuk frontend memulai proses
+
     Route::post('/seminars/{seminar}/register', [UserController::class, 'register'])->name('seminars.register');
 
-    // // Untuk menerima notifikasi dari Midtrans
-    // Route::post('/midtrans/webhook', [UserController::class, 'midtransCallback']);
+    Route::get('/seminars/speaker_applications', [UserController::class, 'speakerApplicationForm'])->name('seminars.speaker_form');
+    Route::post('/seminars/speaker_applications', [UserController::class, 'submitSpeakerApplication'])->name('seminars.speaker_submit');
+
 });
 
 Route::post('/midtrans/webhook', [UserController::class, 'midtransCallback']);
