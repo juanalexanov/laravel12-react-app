@@ -18,7 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->timestamp('paymentDate')->useCurrent();
             $table->string('invoiceNumber');
-            $table->string('paymentMethod');
+            $table->string('paymentMethod')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

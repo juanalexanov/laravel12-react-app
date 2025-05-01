@@ -17,6 +17,7 @@ class Payment extends Model
         'paymentDate',
         'invoiceNumber',
         'paymentMethod',
+        'status',
     ];
 
     /**

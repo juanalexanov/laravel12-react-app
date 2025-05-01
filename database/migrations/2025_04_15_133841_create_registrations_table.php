@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('seminar_id')->constrained('seminars')->cascadeOnDelete();
-            $table->timestamp('registrationDate')->useCurrent();
+            $table->timestamp('registrationDate')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

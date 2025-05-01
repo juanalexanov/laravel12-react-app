@@ -32,7 +32,15 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
     Route::get('/seminars', [UserController::class, 'list'])->name('seminars.list');
     Route::get('/seminars/history', [UserController::class, 'history'])->name('seminars.history');
+
+    // Untuk frontend memulai proses
+    Route::post('/seminars/{seminar}/register', [UserController::class, 'register'])->name('seminars.register');
+
+    // // Untuk menerima notifikasi dari Midtrans
+    // Route::post('/midtrans/webhook', [UserController::class, 'midtransCallback']);
 });
+
+Route::post('/midtrans/webhook', [UserController::class, 'midtransCallback']);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

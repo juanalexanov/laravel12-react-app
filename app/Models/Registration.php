@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Registration extends Model
 {
@@ -49,11 +50,10 @@ class Registration extends Model
     /**
      * Get the payment associated with this registration, if any.
      */
-    public function payment()
+    public function payment(): HasOne
     {
-        return Payment::where('user_id', $this->user_id)
-            ->where('seminar_id', $this->seminar_id)
-            ->first();
+        return $this->hasOne(Payment::class, 'seminar_id', 'seminar_id')
+                    ->where('user_id', $this->user_id);
     }
 
     /**
