@@ -47,7 +47,11 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             // Redirect to /dashboard after successful login
-            return Inertia::location('/dashboard');
+            if ($user->role === 'admin') {
+                return Inertia::location('/dashboard');
+            } else {
+                return Inertia::location('/seminars');
+            }
         }
 
         return response()->json([

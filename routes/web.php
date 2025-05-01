@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ManagementUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ManagementSeminarController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,7 +11,7 @@ Route::get('/', function () {
     return Inertia::render('Login');
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
@@ -26,6 +27,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/seminars', [ManagementSeminarController::class, 'store'])->name('seminars.store');
     Route::put('/seminars/{seminar}', [ManagementSeminarController::class, 'update'])->name('seminars.update');
     Route::delete('/seminars/{seminar}', [ManagementSeminarController::class, 'destroy'])->name('seminars.destroy');
+});
+
+Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
+    Route::get('/seminars', [UserController::class, 'list'])->name('seminars.list');
+    Route::get('/seminars/history', [UserController::class, 'history'])->name('seminars.history');
 });
 
 require __DIR__.'/settings.php';
