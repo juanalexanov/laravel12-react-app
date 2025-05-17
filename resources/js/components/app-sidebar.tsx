@@ -28,7 +28,7 @@ export function AppSidebar() {
             { title: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
             { title: 'Management Users', href: '/management-users', icon: Folder },
             { title: 'Management Seminars', href: '/management-seminars', icon: Folder },
-            { title: 'Management Applications', href: '#', icon: Folder },
+            { title: 'Management Applications', href: '/management-applications', icon: Folder },
             { title: 'Management Payments', href: '/management-payments', icon: Folder },
         ]
         : [

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ManagementApplicationController;
 use App\Http\Controllers\Admin\ManagementPaymentController;
 use App\Http\Controllers\Admin\ManagementUserController;
 use App\Http\Controllers\AuthController;
@@ -30,6 +31,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::delete('/seminars/{seminar}', [ManagementSeminarController::class, 'destroy'])->name('seminars.destroy');
 
     Route::get('/management-payments', [ManagementPaymentController::class, 'index'])->name('management-payments');
+
+    Route::get('/management-applications', [ManagementApplicationController::class, 'index'])->name('management-applications');
+    Route::put('/management-applications/{application}/approve', [ManagementApplicationController::class, 'approve'])->name('management-applications.approve');
+    Route::put('/management-applications/{application}/reject', [ManagementApplicationController::class, 'reject'])->name('management-applications.reject');
 
 });
 
