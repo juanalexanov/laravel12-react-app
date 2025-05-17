@@ -29,7 +29,7 @@ export function AppSidebar() {
             { title: 'Management Users', href: '/management-users', icon: Folder },
             { title: 'Management Seminars', href: '/management-seminars', icon: Folder },
             { title: 'Management Applications', href: '#', icon: Folder },
-            { title: 'Management Payments', href: '#', icon: Folder },
+            { title: 'Management Payments', href: '/management-payments', icon: Folder },
         ]
         : [
             { title: 'List Seminar', href: '/seminars', icon: LayoutList },

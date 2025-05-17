@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ManagementPaymentController;
 use App\Http\Controllers\Admin\ManagementUserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ManagementSeminarController;
@@ -27,6 +28,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::post('/seminars', [ManagementSeminarController::class, 'store'])->name('seminars.store');
     Route::put('/seminars/{seminar}', [ManagementSeminarController::class, 'update'])->name('seminars.update');
     Route::delete('/seminars/{seminar}', [ManagementSeminarController::class, 'destroy'])->name('seminars.destroy');
+
+    Route::get('/management-payments', [ManagementPaymentController::class, 'index'])->name('management-payments');
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user'])->group(function () {
