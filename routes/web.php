@@ -60,5 +60,6 @@ require __DIR__.'/auth.php';
 //make api route login
 Route::post('/api/login', [AuthController::class, 'login'])->name('api.login');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logoutt');
 
 

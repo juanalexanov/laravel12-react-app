@@ -159,19 +159,6 @@ export function LoginForm({
                                     <span className="sr-only">Login with Meta</span>
                                 </Button>
                             </div>
-                            <div className="text-center text-sm">
-                                Don&apos;t have an account?{" "}
-                                <a
-                                    href="/register"
-                                    className="underline underline-offset-4"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        router.get('/register');
-                                    }}
-                                >
-                                    Sign up
-                                </a>
-                            </div>
                         </div>
                     </form>
                     <div className="bg-muted relative hidden md:block">
@@ -186,6 +173,8 @@ export function LoginForm({
             <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
                 By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
                 and <a href="#">Privacy Policy</a>.
+                <br />
+                If want to create an account, please call Admin.
             </div>
         </div>
     );
