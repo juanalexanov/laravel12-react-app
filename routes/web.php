@@ -31,6 +31,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::delete('/seminars/{seminar}', [ManagementSeminarController::class, 'destroy'])->name('seminars.destroy');
 
     Route::get('/management-payments', [ManagementPaymentController::class, 'index'])->name('management-payments');
+    Route::post('/management-payments/{payment}/remind', [ManagementPaymentController::class, 'remind'])->name('management-payments.remind');
+
 
     Route::get('/management-applications', [ManagementApplicationController::class, 'index'])->name('management-applications');
     Route::put('/management-applications/{application}/approve', [ManagementApplicationController::class, 'approve'])->name('management-applications.approve');

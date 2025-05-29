@@ -8,8 +8,9 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import AppLayout from "@/layouts/app-layout";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, router, usePage } from "@inertiajs/react";
 import { type Payment } from "@/types/payment";
+import { Button } from "@/components/ui/button";
 
 const breadcrumbs = [{ title: "Management Payments", href: "/management-payments" }];
 
@@ -38,6 +39,7 @@ export default function ManagementPayments() {
                                     <TableHead>Metode</TableHead>
                                     <TableHead>Jumlah</TableHead>
                                     <TableHead>Tanggal</TableHead>
+                                    <TableHead>Action</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -49,6 +51,24 @@ export default function ManagementPayments() {
                                             <TableCell>{payment.paymentMethod}</TableCell>
                                             <TableCell>Rp {Number(payment.amount).toLocaleString("id-ID")}</TableCell>
                                             <TableCell>{new Date(payment.paymentDate).toLocaleDateString("id-ID")}</TableCell>
+                                            <TableCell>
+                                            <Button
+                                                variant="default"
+                                                size="sm"
+                                                onClick={() =>
+                                                router.post(
+                                                    `/management-payments/${payment.id}/remind`,
+                                                    {},
+                                                    {
+                                                    preserveScroll: true,
+                                                    onSuccess: () => alert("Email terkirim!"),
+                                                    }
+                                                )
+                                                }
+                                            >
+                                                Remind
+                                            </Button>
+                                            </TableCell>
                                         </TableRow>
                                     ))
                                 ) : (
