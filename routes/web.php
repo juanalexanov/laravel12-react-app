@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManagementApplicationController;
 use App\Http\Controllers\Admin\ManagementPaymentController;
 use App\Http\Controllers\Admin\ManagementUserController;
@@ -14,9 +15,11 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    // Route::get('dashboard', function () {
+    //     return Inertia::render('dashboard');
+    // })->name('dashboard');
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('management-users', [ManagementUserController::class, 'index'])->name('management-users');
 
