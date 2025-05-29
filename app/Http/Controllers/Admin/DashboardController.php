@@ -55,6 +55,11 @@ class DashboardController extends Controller
             })->toArray();
         }
 
+        // Seminar hari ini
+        $todaySeminars = Seminar::whereDate('eventDate', Carbon::today())->get(['id', 'title', 'eventDate', 'eventTime']);
+        // Seminar besok
+        $tomorrowSeminars = Seminar::whereDate('eventDate', Carbon::tomorrow())->get(['id', 'title', 'eventDate', 'eventTime']);
+
         $upcomingSeminars = Seminar::whereDate('eventDate', '>=', now())
             ->orderBy('eventDate')
             ->limit(5)
@@ -70,6 +75,10 @@ class DashboardController extends Controller
             'notifications' => [
                 'seminarsWithoutSpeaker' => Seminar::whereNull('speaker_id')->count(),
                 'pendingSpeakerApplications' => SpeakerApplication::where('status', 'pending')->count(),
+            ],
+            'reminderSeminars' => [
+                'today' => $todaySeminars,
+                'tomorrow' => $tomorrowSeminars,
             ],
         ]);
     }

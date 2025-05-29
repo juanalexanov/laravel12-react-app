@@ -59,10 +59,14 @@ type DashboardProps = {
         seminarsWithoutSpeaker: number;
         pendingSpeakerApplications: number;
     };
+    reminderSeminars: {
+        today: Seminar[];
+        tomorrow: Seminar[];
+    };
 };
 
 export default function Dashboard() {
-    const { stats, chart, upcomingSeminars, notifications } = usePage<DashboardProps>().props;
+    const { stats, chart, upcomingSeminars, notifications, reminderSeminars } = usePage<DashboardProps>().props;
     const [range, setRange] = useState("7d");
     const [textColor, setTextColor] = useState("#000");
 
@@ -118,7 +122,27 @@ export default function Dashboard() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
             <div className="flex flex-col gap-4 p-4">
-                {/* Notifikasi */}
+                {/* Notifikasi Seminar Hari Ini / Besok */}
+                {reminderSeminars.today.length > 0 && (
+                    <div className="p-3 border-l-4 border-red-500 bg-red-100 text-red-800 rounded">
+                        {reminderSeminars.today.map((s) => (
+                            <div key={s.id}>
+                                📣 Seminar “{s.title}” akan berlangsung <strong>HARI INI</strong> pukul {s.eventTime}
+                            </div>
+                        ))}
+                    </div>
+                )}
+                {reminderSeminars.tomorrow.length > 0 && (
+                    <div className="p-3 border-l-4 border-orange-500 bg-orange-100 text-orange-800 rounded">
+                        {reminderSeminars.tomorrow.map((s) => (
+                            <div key={s.id}>
+                                ⏰ Seminar “{s.title}” akan dimulai pada pukul {s.eventTime} WIB
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Notifikasi lainnya */}
                 {notifications.seminarsWithoutSpeaker > 0 && (
                     <div className="p-3 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-800 rounded">
                         ⚠️ {notifications.seminarsWithoutSpeaker} seminar belum memiliki pembicara.
@@ -126,7 +150,7 @@ export default function Dashboard() {
                 )}
                 {notifications.pendingSpeakerApplications > 0 && (
                     <div className="p-3 border-l-4 border-blue-500 bg-blue-100 text-blue-800 rounded">
-                        📬 {notifications.pendingSpeakerApplications} calon pembicara menunggu di review.
+                        📬 {notifications.pendingSpeakerApplications} aplikasi pembicara menunggu peninjauan.
                     </div>
                 )}
 
